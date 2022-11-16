@@ -1,0 +1,195 @@
+swagger: '2.0'
+info:
+  title: Envio Correo API
+  description: envio correo transversal sistemas sag
+  version: "1.0.0"
+# the domain of the service
+# host: apilog.sag.gob.cl
+host: localhost:3000/api
+# array of all schemes that your API supports
+schemes:
+  # - https
+# will be prefixed to all paths
+# basePath: /v1
+produces:
+  - application/json
+paths:
+  /correo:
+    post:
+      summary: envia correo
+      tags:
+      - sistema
+      description: |
+        El endpoint envia correo.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: sistema para registrar
+        required: true
+        schema:
+          $ref: '#/definitions/CorreoRequest'
+      responses:
+        200:
+          description: successful operation
+        401:
+          description: error en petición
+        500:
+          description: error en servidor
+  /sistema:
+    get:
+      summary: obtener sistemas registrados
+      description: |
+        El endpoint retorna los sistemas registrados.
+      parameters:
+        - name: nombre
+          in: query
+          description: nombre de sistema.
+          required: false
+          type: string
+        - name: limite
+          in: query
+          description: limite de registros.
+          required: false
+          type: number
+        - name: desde
+          in: query
+          description: desde de registros.
+          required: false
+      tags:
+        - sistema
+      responses:
+        200:
+          description: An array of sistemas
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Sistema'
+        500:
+          description: error servidor
+    post:
+      summary: crear nuevo sistema
+      tags:
+      - sistema
+      description: |
+        El endpoint registra sistema.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: sistema para registrar
+        required: true
+        schema:
+          $ref: '#/definitions/SistemaRequest'
+      responses:
+        201:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Sistema'
+        401:
+          description: error en petición
+        500:
+          description: error en servidor
+    delete:
+      summary: eliminar sistema
+      tags:
+      - sistema
+      description: |
+        El endpoint elimina logicamente el sistema.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: 'id'
+        in: 'path'
+        description: 'id de sistema para borrar'
+        required: true
+      responses:
+        200:
+          description: successful operation
+        401:
+          description: error en petición
+        500:
+          description: error en servidor
+definitions:
+  CorreoRequest:
+    type: object
+    required:
+    - sistemaId
+    properties:
+      sistemaId:
+        type: string
+        example: 61bcf10bc7434dc339ed8545
+      from:
+        type: string
+        example: Nodemailer <example@nodemailer.com>
+      to:
+        type: array
+        items: 
+          $ref: '#/definitions/Mail'
+      cc:
+        type: array
+        items: 
+          $ref: '#/definitions/Mail'
+      bcc:
+        type: array
+        items: 
+          $ref: '#/definitions/Mail'
+      subject:
+        type: string
+        example: asunto de correo test
+      text:
+        type: string
+        example: texto de correo test
+      priority:
+        type: string
+        enum: [high, normal, low]
+        default: 'normal'
+      urlArchivo:
+        type: array
+        items:
+          $ref: '#/definitions/Url'
+  SistemaRequest:
+    type: object
+    required:
+    - nombre
+    properties:
+      nombre:
+        type: string
+        example: nombreSistemaTest1
+      parrafo:
+        type: string
+        example: parrafo oara sistema
+  Sistema:
+    type: object
+    properties:
+      nombre:
+        type: string
+        description: nombre del sistema.
+      parrafo:
+        type: string
+        description: parrafo de correo para sistema.
+      estado:
+        type: boolean
+        description: estado del sistema en la bd.
+  Mail:
+    type: object
+    properties:
+      mail:
+        type: string
+        description: dirección de correo electrónico
+        example: claudio.ulloa2@sag.gob.cl
+  Url:
+    type: object
+    properties:
+      url:
+        type: string
+        description: url de archivo
+        example: https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2021/10/11/16339570986267.jpg
