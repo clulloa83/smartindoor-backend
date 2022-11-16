@@ -2,7 +2,7 @@ const { StatusCode } = require('status-code-enum');
 const servicioRegistros = require('../services/servicio-registros');
 const ParamsRegistros = require('../models/params/registros-params');
 
-const { io } = require('../app');
+// const { io } = require('../app');
 
 /**
  * registra registro
@@ -78,15 +78,15 @@ const registrosDelete = async(req = request, res = response) => {
     }
 }
 
-const testGet = (req, res) => {
-    res.status(StatusCode.SuccessOK).json({
-        mensaje: 'acceso correcto'
-    });
-}
+// const testGet = (req, res) => {
+//     res.status(StatusCode.SuccessOK).json({
+//         mensaje: 'acceso correcto'
+//     });
+// }
 
 module.exports = {
     registrosPost,
     registrosGet,
     registrosDelete,
-    testGet
+    // testGet
 };

@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
-const { createServer } = require('http');
+// const { createServer } = require('http');
 
 require('dotenv').config();
 const { dbConnection } = require('./db/mongo/config');
-const { socketController } = require('./sockets/controller');
+// const { socketController } = require('./sockets/controller');
 
 // const swaggerUi = require('swagger-ui-express');
 // const YAML = require('yamljs');
@@ -114,9 +114,9 @@ class Server {
         
     }
 
-    sockets = () => {
-        this.io.on('connection', ( socket ) => socketController(socket, this.io ) );
-    }
+    // sockets = () => {
+    //     this.io.on('connection', ( socket ) => socketController(socket, this.io ) );
+    // }
 
     listen = () => {
         // this.server.listen( this.port, () => {

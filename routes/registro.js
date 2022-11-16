@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos, validarJWT } = require('../middlewares');
-const { registrosPost, registrosGet, registrosDelete, testGet } = require('../controllers/registro');
+const { registrosPost, registrosGet, registrosDelete } = require('../controllers/registro');
 
 const router = Router();
 
@@ -31,6 +31,6 @@ router.delete('/',[
     validarCampos
 ], registrosDelete);
 
-router.get('/test', testGet);
+// router.get('/test', testGet);
 
 module.exports = router;

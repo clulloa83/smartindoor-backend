@@ -1,13 +1,13 @@
-const { Socket } = require('socket.io');
+// const { Socket } = require('socket.io');
 // const { comprobarJWT } = require('../helpers');
 // const { ChatMensajes } = require('../models');
 
 // const chatMensajes = new ChatMensajes();
 
 
-const socketController = async( socket = new Socket(), io ) => {
+// const socketController = async( socket = new Socket(), io ) => {
 
-    console.log('Cliente conectado', socket.id );
+    // console.log('Cliente conectado', socket.id );
 
 
     // const usuario = await comprobarJWT(socket.handshake.headers['x-token']);
@@ -25,12 +25,12 @@ const socketController = async( socket = new Socket(), io ) => {
     
 
     // Limpiar cuando alguien se desconeta
-    socket.on('disconnect', () => {
-        console.log('Cliente desconectado', socket.id );
+    // socket.on('disconnect', () => {
+        // console.log('Cliente desconectado', socket.id );
 
         // chatMensajes.desconectarUsuario( usuario.id );
         // io.emit('usuarios-activos', chatMensajes.usuariosArr );
-    })
+    // })
 
     // socket.on('enviar-mensaje', ({ uid, mensaje }) => {
         
@@ -44,22 +44,22 @@ const socketController = async( socket = new Socket(), io ) => {
 
     // })
 
-    socket.on('mensaje', (payload) => {
-        console.log('payload', payload);
+    // socket.on('mensaje', (payload) => {
+    //     console.log('payload', payload);
 
-        const respuesta = {
-            msg: 'recibido desde el server'
-        }
+    //     const respuesta = {
+    //         msg: 'recibido desde el server'
+    //     }
 
-        io.emit('mensaje', respuesta)
+    //     io.emit('mensaje', respuesta)
 
-    });
+    // });
 
     
-}
+// }
 
 
 
-module.exports = {
-    socketController
-}
+// module.exports = {
+//     socketController
+// }
