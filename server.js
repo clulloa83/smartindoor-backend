@@ -17,16 +17,16 @@ class Server {
         this.app    = express();
         this.port   = process.env.PORT;
 
-        this.server = createServer( this.app );
-        this.io     = require('socket.io')(this.server, {
-            cors: {
-                origin: 'http://localhost:8100',
-                // origin: '*',
-                methods: ['GET', 'POST'],
-                allowedHeaders: ['Authorization'],
-                credentials: true
-                }
-          });
+        // this.server = createServer( this.app );
+        // this.io     = require('socket.io')(this.server, {
+        //     cors: {
+        //         origin: 'http://localhost:8100',
+        //         // origin: '*',
+        //         methods: ['GET', 'POST'],
+        //         allowedHeaders: ['Authorization'],
+        //         credentials: true
+        //         }
+        //   });
 
 
         this.paths = {
@@ -54,7 +54,7 @@ class Server {
         this.routes();
 
         // Sockets
-        this.sockets();
+        // this.sockets();
     }
 
     conectarDB = async()=> {
@@ -119,8 +119,8 @@ class Server {
     }
 
     listen = () => {
-        this.server.listen( this.port, () => {
-        // this.app.listen( this.port,  () => {
+        // this.server.listen( this.port, () => {
+        this.app.listen( this.port,  () => {
             console.log(`servidor corriendo en puerto ${ this.port }`);
         });
     }
