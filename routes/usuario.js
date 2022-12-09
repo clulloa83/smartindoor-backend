@@ -7,7 +7,7 @@ const { usuariosGet, usuarioPost, usuarioDelete } = require('../controllers/usua
 const router = Router();
 
 router.post('/',[
-    validarJWT,
+    // validarJWT,
     // check('cuenta', 'el cuenta es obligatorio').not().isEmpty(),
     // check('cuenta').custom( esCorreoValido ),
     check('contraseña', 'el contraseña es obligatorio').not().isEmpty(),
